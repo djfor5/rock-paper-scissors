@@ -31,13 +31,13 @@ btns.forEach(btn => {
     if (gameResult === 1) {
       playerScore++
       roundOutcome.textContent = `${playerSelection} beats ${computerSelection}`
-      roundWinner.textContent = `You win round ${gameCount + 1}`
+      roundWinner.textContent = `You won round ${gameCount + 1}`
       console.log(roundOutcome.textContent)
       console.log(`%c${roundWinner.textContent}`, "font-weight: bold; font-style: italic; color: green")
     } else if (gameResult === -1){
       computerScore++
       roundOutcome.textContent = `${playerSelection} loses to ${computerSelection}`
-      roundWinner.textContent = `You lose round ${gameCount + 1}`
+      roundWinner.textContent = `You lost round ${gameCount + 1}`
       console.log(roundOutcome.textContent)
       console.log(`%c${roundWinner.textContent}`, "font-weight: bold; font-style: italic; color: red")
     } else {
@@ -84,23 +84,21 @@ function playRound(playerSelection, computerSelection){
   playerSelection = playerSelection.toUpperCase()
   computerSelection = computerSelection.toUpperCase()
 
-  if (playerSelection === 'ROCK' && computerSelection === "ROCK"){
-    return 0
-  } else if (playerSelection === 'ROCK' && computerSelection === "PAPER"){
-    return -1
-  } else if (playerSelection === 'ROCK' && computerSelection === "SCISSORS"){
-    return 1
-  } else if (playerSelection === 'PAPER' && computerSelection === "ROCK"){
-    return 1
-  } else if (playerSelection === 'PAPER' && computerSelection === "PAPER"){
-    return 0
-  } else if (playerSelection === 'PAPER' && computerSelection === "SCISSORS"){
-    return -1
-  } else if (playerSelection === 'SCISSORS' && computerSelection === "ROCK"){
-    return -1
-  } else if (playerSelection === 'SCISSORS' && computerSelection === "PAPER"){
-    return 1
-  } else if (playerSelection === 'SCISSORS' && computerSelection === "SCISSORS"){
-    return 0
-  } 
+  switch (true){
+    // cases where player beats computer
+    case playerSelection === 'ROCK' && computerSelection === "SCISSORS":
+    case playerSelection === 'PAPER' && computerSelection === "ROCK":
+    case playerSelection === 'SCISSORS' && computerSelection === "PAPER":
+      return 1;
+    // cases where player ties with computer
+    case playerSelection === 'ROCK' && computerSelection === "ROCK":
+    case playerSelection === 'PAPER' && computerSelection === "PAPER":
+    case playerSelection === 'SCISSORS' && computerSelection === "SCISSORS":
+      return 0; 
+    // cases where player loses to computer
+    case playerSelection === 'ROCK' && computerSelection === "PAPER":
+    case playerSelection === 'PAPER' && computerSelection === "SCISSORS":
+    case playerSelection === 'SCISSORS' && computerSelection === "ROCK":
+      return -1;
+  }
 }
