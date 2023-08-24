@@ -1,3 +1,5 @@
+import "./style.css";
+
 let gameCount = 0;
 let playerScore = 0;
 let computerScore = 0;
