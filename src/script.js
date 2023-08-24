@@ -1,4 +1,6 @@
 import "./style.css";
+import { getComputerChoice } from "./getComputerChoice.js";
+import { playRound } from "./playRound.js";
 
 let gameCount = 0;
 let playerScore = 0;
@@ -67,45 +69,3 @@ btns.forEach((btn) => {
     }
   });
 });
-
-function getComputerChoice() {
-  const computerChoiceIndex = Math.floor(Math.random() * 3);
-  let computerDecision;
-  switch (computerChoiceIndex) {
-    case 0:
-      computerDecision = "ROCK";
-      break;
-    case 1:
-      computerDecision = "PAPER";
-      break;
-    case 2:
-      computerDecision = "SCISSORS";
-      break;
-    default:
-  }
-  return computerDecision;
-}
-
-function playRound(playerSelection, computerSelection) { // eslint-disable-line consistent-return
-  const playerSelectionUpper = playerSelection.toUpperCase();
-  const computerSelectionUpper = computerSelection.toUpperCase();
-
-  switch (true) {
-    // cases where player beats computer
-    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "SCISSORS":
-    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "ROCK":
-    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "PAPER":
-      return 1;
-    // cases where player ties with computer
-    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "ROCK":
-    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "PAPER":
-    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "SCISSORS":
-      return 0;
-    // cases where player loses to computer
-    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "PAPER":
-    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "SCISSORS":
-    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "ROCK":
-      return -1;
-    default:
-  }
-}
