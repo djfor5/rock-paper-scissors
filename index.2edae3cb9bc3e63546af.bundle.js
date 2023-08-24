@@ -478,6 +478,78 @@ function styleTagTransform(css, styleElement) {
 }
 module.exports = styleTagTransform;
 
+/***/ }),
+
+/***/ "./src/getComputerChoice.js":
+/*!**********************************!*\
+  !*** ./src/getComputerChoice.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getComputerChoice: () => (/* binding */ getComputerChoice)
+/* harmony export */ });
+function getComputerChoice() {
+  const computerChoiceIndex = Math.floor(Math.random() * 3);
+  let computerDecision;
+  switch (computerChoiceIndex) {
+    case 0:
+      computerDecision = "ROCK";
+      break;
+    case 1:
+      computerDecision = "PAPER";
+      break;
+    case 2:
+      computerDecision = "SCISSORS";
+      break;
+    default:
+  }
+  return computerDecision;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./src/playRound.js":
+/*!**************************!*\
+  !*** ./src/playRound.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   playRound: () => (/* binding */ playRound)
+/* harmony export */ });
+function playRound(playerSelection, computerSelection) { // eslint-disable-line consistent-return
+  const playerSelectionUpper = playerSelection.toUpperCase();
+  const computerSelectionUpper = computerSelection.toUpperCase();
+
+  switch (true) {
+    // cases where player beats computer
+    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "SCISSORS":
+    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "ROCK":
+    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "PAPER":
+      return 1;
+    // cases where player ties with computer
+    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "ROCK":
+    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "PAPER":
+    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "SCISSORS":
+      return 0;
+    // cases where player loses to computer
+    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "PAPER":
+    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "SCISSORS":
+    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "ROCK":
+      return -1;
+    default:
+  }
+}
+
+
+
+
 /***/ })
 
 /******/ 	});
@@ -561,6 +633,10 @@ var __webpack_exports__ = {};
   \***********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _getComputerChoice_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getComputerChoice.js */ "./src/getComputerChoice.js");
+/* harmony import */ var _playRound_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playRound.js */ "./src/playRound.js");
+
+
 
 
 let gameCount = 0;
@@ -582,9 +658,9 @@ btns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     const playerSelection = event.target.id.toUpperCase();
     // eslint-disable-next-line no-use-before-define
-    const computerSelection = getComputerChoice();
+    const computerSelection = (0,_getComputerChoice_js__WEBPACK_IMPORTED_MODULE_1__.getComputerChoice)();
     // eslint-disable-next-line no-use-before-define
-    const gameResult = playRound(playerSelection, computerSelection);
+    const gameResult = (0,_playRound_js__WEBPACK_IMPORTED_MODULE_2__.playRound)(playerSelection, computerSelection);
 
     round.textContent = `ROUND ${gameCount + 1}`;
     playerChoice.textContent = `Player selection = ${playerSelection}`;
@@ -631,50 +707,8 @@ btns.forEach((btn) => {
   });
 });
 
-function getComputerChoice() {
-  const computerChoiceIndex = Math.floor(Math.random() * 3);
-  let computerDecision;
-  switch (computerChoiceIndex) {
-    case 0:
-      computerDecision = "ROCK";
-      break;
-    case 1:
-      computerDecision = "PAPER";
-      break;
-    case 2:
-      computerDecision = "SCISSORS";
-      break;
-    default:
-  }
-  return computerDecision;
-}
-
-function playRound(playerSelection, computerSelection) { // eslint-disable-line consistent-return
-  const playerSelectionUpper = playerSelection.toUpperCase();
-  const computerSelectionUpper = computerSelection.toUpperCase();
-
-  switch (true) {
-    // cases where player beats computer
-    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "SCISSORS":
-    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "ROCK":
-    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "PAPER":
-      return 1;
-    // cases where player ties with computer
-    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "ROCK":
-    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "PAPER":
-    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "SCISSORS":
-      return 0;
-    // cases where player loses to computer
-    case playerSelectionUpper === "ROCK" && computerSelectionUpper === "PAPER":
-    case playerSelectionUpper === "PAPER" && computerSelectionUpper === "SCISSORS":
-    case playerSelectionUpper === "SCISSORS" && computerSelectionUpper === "ROCK":
-      return -1;
-    default:
-  }
-}
-
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=index.a4bbc4893894f502cd51.bundle.js.map
+//# sourceMappingURL=index.2edae3cb9bc3e63546af.bundle.js.map
