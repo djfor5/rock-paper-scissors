@@ -1,23 +1,17 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // eslint-disable-line import/no-extraneous-dependencies
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  devtool: "source-map",
   entry: {
     index: "./src/script.js",
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Caching",
-      template: "./src/template.html",
-    }),
-  ],
   output: {
     filename: "[name].[contenthash].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -28,9 +22,27 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp|ico)$/i,
         type: "asset/resource",
+      },
+      {
+        test: /\.(?:js|mjs|cjs)$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              ["@babel/preset-env", { targets: "defaults" }],
+            ],
+          },
+        },
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Caching",
+      template: "./src/template.html",
+    }),
+  ],
 };
