@@ -698,4 +698,4 @@ btns.forEach(btn => {
 
 /******/ })()
 ;
-//# sourceMappingURL=index.677505e812898ba10294.bundle.js.map
+//# sourceMappingURL=index.bundle.js.map
